@@ -1,5 +1,4 @@
-
-namespace MusicStreaminApi
+namespace MusicStreamingApi
 {
     public class Program
     {
@@ -14,6 +13,9 @@ namespace MusicStreaminApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddControllers();
+            builder.Services.AddScoped<IPlayLogsService, PlayLogsService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -26,6 +28,8 @@ namespace MusicStreaminApi
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+            app.MapControllers();
 
             app.Run();
         }

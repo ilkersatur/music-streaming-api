@@ -1,0 +1,115 @@
+﻿Protokol	    Ne İşe Yarar?
+IPv4 (0x0800)	İnternet Protokolünün 4. versiyonu. Ağ üzerinde veri paketlerini yönlendirmek için kullanılır.
+ARP (0x0806)	Adres Çözümleme Protokolü. IP adresini Ethernet MAC adresine çevirmek için kullanılır.
+IPv6 (0x86DD)	İnternet Protokolünün 6. ve daha yeni versiyonu. Daha büyük adresleme alanı ve gelişmiş özellikler sağlar.
+VLAN (0x8100)	Sanal LAN oluşturmak için çerçeveye etiket ekler. Ağ segmentasyonunu sağlar.
+MPLS unicast (0x8847)	Veri paketlerinin ağda daha hızlı yönlendirilmesini sağlar. Trafik mühendisliği için kullanılır.
+MPLS multicast (0x8848)	Çoklu hedefe MPLS tabanlı paket gönderimi sağlar.
+X.25 (0x0805)	Eski bir paket anahtarlamalı ağ protokolü.
+RARP (0x8035)	MAC adresinden IP adresi öğrenmek için kullanılır (genellikle artık ARP kullanılır).
+IPX (0x8137)	Novell NetWare ağları için kullanılan eski bir protokol.
+PPPoE session (0x880B)	DSL gibi bağlantılarda PPP oturumlarının Ethernet üzerinden taşınmasını sağlar.
+PPPoE discovery (0x8863)	PPPoE oturumunun kurulması için keşif aşaması.
+QNX Qnet (0x8204)	QNX işletim sistemine ait ağ protokolü.
+Ethernet flow control (0x8808)	Ethernet üzerinde akış kontrolü için kullanılır.
+LLDP (0x88CC)	Ağ cihazlarının komşularını keşfetmesini sağlayan protokol.
+MACsec (0x88E5)	Ethernet katmanında veri güvenliği ve şifreleme sağlar.
+PPP (0x880C)	Noktadan noktaya bağlantı protokolü, genellikle modem veya seri hat bağlantılarında kullanılır.
+
+Verdiğiniz hex dizisi sonundaki değer: 86 dd -> 0x86DD -> IPv6
+
+--------------------------------------------------------------------------------------------------------------------------
+45 80 02 80 20 34 40 00 40 06 51 9d 0a ba d1 ab 0a ba df 07
+
+IPv4 başlığında “Transport Protocol” (Taşıma Protokolü) bilgisini taşıyan alan 10. bayttır.
+
+Başlığı parçalara ayırırsak:
+
+    1.   bayt: Versiyon ve Header Uzunluğu (45)
+
+    2.   bayt: Hizmet Türü (80)
+
+    3-4. baytlar: Paket Uzunluğu (02 80)
+
+    5-6. baytlar: Identification (20 34)
+
+    7-8. baytlar: Bayraklar ve Fragment Offset (40 00)
+
+    9.   bayt: TTL (Time To Live) (40)
+
+    10. bayt: Protokol (06)
+
+    11-12. baytlar: Header checksum (51 9d)
+
+    13-16. baytlar: Kaynak IP adresi (0a ba d1 ab)
+
+    17-20. baytlar: Hedef IP adresi (0a ba df 07)
+
+Buradaki protokol değeri 06 (hex)'dır.
+
+
+1	ICMP	Internet Control Message Protocol (Hata ve kontrol mesajları)
+2	IGMP	Internet Group Management Protocol (Multicast yönetimi)
+6	TCP	Transmission Control Protocol (Bağlantı odaklı, güvenilir)
+17	UDP	User Datagram Protocol (Bağlantısız, hızlı)
+41	IPv6 encapsulation	IPv6 paket kapsülleme
+47	GRE	Generic Routing Encapsulation
+50	ESP	Encapsulating Security Payload (IPSec)
+51	AH	Authentication Header (IPSec)
+58	ICMPv6	Internet Control Message Protocol version 6
+89	OSPF	Open Shortest Path First (Yönlendirme protokolü)
+132	SCTP	Stream Control Transmission Protocol
+
+IPv4 protokol numaralarına göre:
+
+    06 = TCP (Transmission Control Protocol)
+
+Yani bu paket TCP protokolü kullanıyor.
+
+--------------------------------------------------
+
+Normal veritabanları (Row-oriented)
+
+    Veriler tablo halinde satır satır depolanır.
+
+    Örneğin; bir müşteri tablosunda müşteri1’in adı, soyadı, adresi, telefon numarası aynı satırda depolanır.
+
+    Satır bazlı depolama OLTP (işlem yoğun) uygulamalar için uygundur.
+
+Kolon tabanlı veritabanları (Columnar-oriented databases)
+
+    Veriler sütun sütun saklanır.
+
+    Aynı sütundaki (örneğin, sadece “adı” sütunu) tüm veriler fiziksel olarak yan yana depolanır.
+
+    Bu yapı, özellikle analitik sorgular ve büyük veri işlemlerinde avantaj sağlar.
+
+Avantajları
+
+    Sorgu performansı: Sadece ihtiyaç duyulan sütunlar okunur, bu yüzden büyük tablolarda sorgular çok hızlı olur.
+
+    Sıkıştırma: Aynı türde veriler yan yana olduğu için veri sıkıştırma oranı yüksektir.
+
+    Analitik ve raporlama: Karmaşık toplama, filtreleme işlemlerinde etkilidir.
+
+Dezavantajları
+
+    Satır bazlı işlemler (ekleme, güncelleme, silme) row-based kadar hızlı değildir.
+
+    OLTP işlemler için uygun değildir.
+
+Örnekler
+
+    Apache Cassandra (bazı modları)
+
+    Amazon Redshift
+
+    Google BigQuery
+
+    ClickHouse
+
+Kısaca:
+Columnar-oriented databases, verileri sütun sütun tutan, büyük veri ve analitik sorgularda yüksek performans sağlayan veritabanlarıdır.
+
+------------------------------------------
+
